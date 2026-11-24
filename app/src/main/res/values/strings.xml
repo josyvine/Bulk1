@@ -26,6 +26,21 @@
     <string name="explore_guide_title">Bulk Screenshot Splitter Guide</string>
     <string name="explore_guide_body">This app is designed to help you split large text files, log outputs, or code source files into multiple high-resolution screenshot images.\n\nTo avoid cluttering your storage with hundreds of separate images, each file\'s screenshots are bundled directly into a compressed ZIP file.\n\nAll results are saved inside your device\'s public Documents directory: /Documents/BulkScreenshotSplitter/{FolderPrefix}/</string>
     <string name="btn_open_pictures">Open Documents Directory</string>
+    <string name="btn_contact_us">Contact Us</string>
+    <string name="contact_card_subtitle">Have questions, feedback, or need help? Send us a message directly.</string>
+
+    <!-- Contact Screen -->
+    <string name="contact_title">Contact Us</string>
+    <string name="contact_subtitle">Need support or want to report an issue? Fill out the form below and our team will reply to your email.</string>
+    <string name="contact_name_hint">Your Name</string>
+    <string name="contact_email_hint">Your Email</string>
+    <string name="contact_message_hint">Your Message</string>
+    <string name="contact_send_button">Send Message</string>
+    <string name="contact_sending">Sending...</string>
+    <string name="contact_fill_all_fields">Please fill in all fields.</string>
+    <string name="contact_invalid_email">Please enter a valid email address.</string>
+    <string name="contact_message_sent">Message sent! Thank you for contacting us.</string>
+    <string name="contact_send_failed">Failed to send message. Please try again later.</string>
     
     <!-- Process Dialog -->
     <string name="progress_generating">Generating screenshots...</string>
