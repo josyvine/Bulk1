@@ -75,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
 
     // UI components - Explore
     private MaterialButton btnOpenDocuments;
+    private MaterialButton btnContactUs;
 
     // State list
     private final List<SelectedFile> selectedFiles = new ArrayList<>();
@@ -156,6 +157,7 @@ public class MainActivity extends AppCompatActivity {
         sbJpegQuality = findViewById(R.id.sb_jpeg_quality);
 
         btnOpenDocuments = findViewById(R.id.btn_open_pictures);
+        btnContactUs = findViewById(R.id.btn_contact_us);
 
         BottomNavigationView bottomNavigation = findViewById(R.id.bottom_navigation);
 
@@ -200,6 +202,11 @@ public class MainActivity extends AppCompatActivity {
 
         // Setup Open Directory Button
         btnOpenDocuments.setOnClickListener(v -> openOutputDirectory());
+
+        // Setup Contact Us Button
+        if (btnContactUs != null) {
+            btnContactUs.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, ContactActivity.class)));
+        }
 
         // Initialize and bind settings fields
         initSettingsFields();
