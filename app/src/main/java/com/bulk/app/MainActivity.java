@@ -7,30 +7,36 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Debug;
 import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import androidx.activity.EdgeToEdge;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import com.bulk.app.utils.NativeBridge;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStream;
@@ -96,22 +102,29 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        EdgeToEdge.enable(this);
         super.onCreate(savedInstanceState);
-
-        // Active Anti-Debugging Guard: Terminate process immediately if debugger is attached to release build
-        if (!BuildConfig.DEBUG && (Debug.isDebuggerConnected() || Debug.waitingForDebugger())) {
-            finishAffinity();
-            System.exit(0);
-            return;
-        }
-
         setContentView(R.layout.activity_main);
 
-        // Initialize Google Mobile Ads SDK
+        View rootLayout = findViewById(R.id.root_layout);
+        if (rootLayout != null) {
+            ViewCompat.setOnApplyWindowInsetsListener(rootLayout, (v, insets) -> {
+                Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+                v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+                return insets;
+            });
+        }
+
+        // Initialize Google Mobile Ads SDK & load banner via NativeBridge
         try {
             MobileAds.initialize(this, initializationStatus -> {});
-            AdView mAdView = findViewById(R.id.adView);
-            if (mAdView != null) {
+            FrameLayout adContainer = findViewById(R.id.ad_container);
+            if (adContainer != null) {
+                AdView mAdView = new AdView(this);
+                mAdView.setAdSize(AdSize.BANNER);
+                mAdView.setAdUnitId(NativeBridge.getBannerAdId());
+                adContainer.removeAllViews();
+                adContainer.addView(mAdView);
                 AdRequest adRequest = new AdRequest.Builder().build();
                 mAdView.loadAd(adRequest);
             }
