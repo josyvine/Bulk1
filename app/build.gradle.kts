@@ -6,12 +6,12 @@ plugins {
 }
 
 android {
-  namespace = "com.bulk.app"
+  namespace = "com.vineyard.bulk.app"
   compileSdk { version = release(36) { minorApiLevel = 1 } }
   ndkVersion = "28.0.12433566"
 
   defaultConfig {
-    applicationId = "com.bulk.app"
+    applicationId = "com.vineyard.bulk.app"
     minSdk = 26
     targetSdk = 36
     versionCode = 1
