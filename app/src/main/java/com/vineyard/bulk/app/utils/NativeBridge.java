@@ -7,4 +7,6 @@ public class NativeBridge {
     }
 
     public static native String getBannerAdId();
+
+    public static native String getContactEndpoint();
 }
