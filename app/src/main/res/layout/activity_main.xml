@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/slate_900">
@@ -375,13 +376,11 @@
 
     </FrameLayout>
 
-    <!-- Banner Ad View -->
-    <com.google.android.gms.ads.AdView
-        android:id="@+id/adView"
+    <!-- Banner Ad Container (Populated programmatically via NativeBridge) -->
+    <FrameLayout
+        android:id="@+id/ad_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:adSize="BANNER"
-        app:adUnitId="ca-app-pub-2223803405403727/9277702713"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -392,7 +391,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:elevation="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/adView"
+        app:layout_constraintBottom_toTopOf="@+id/ad_container"
         app:menu="@menu/bottom_nav_menu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
