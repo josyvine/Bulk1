@@ -8,16 +8,27 @@ plugins {
 android {
   namespace = "com.bulk.app"
   compileSdk { version = release(36) { minorApiLevel = 1 } }
+  ndkVersion = "28.0.12433566"
 
   defaultConfig {
     applicationId = "com.bulk.app"
-    // minSdk set to 26 for runtime InMemoryDexClassLoader support
     minSdk = 26
     targetSdk = 36
     versionCode = 1
     versionName = "1.0"
 
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+    externalNativeBuild {
+      cmake {
+        cppFlags("-std=c++17", "-fvisibility=hidden", "-O3")
+        arguments("-DANDROID_LD=lld", "-DANDROID_SUPPORT_FLEXIBLE_PAGE_SIZES=ON")
+      }
+    }
+
+    ndk {
+      abiFilters += listOf("armeabi-v7a", "arm64-v8a", "x86", "x86_64")
+    }
   }
 
   signingConfigs {
@@ -76,6 +87,19 @@ android {
       isShrinkResources = false
       isDebuggable = true
       signingConfig = signingConfigs.getByName("debugConfig")
+    }
+  }
+
+  externalNativeBuild {
+    cmake {
+      path = file("src/main/cpp/CMakeLists.txt")
+      version = "3.22.1"
+    }
+  }
+
+  packaging {
+    jniLibs {
+      useLegacyPackaging = false
     }
   }
 
