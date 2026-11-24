@@ -19,6 +19,13 @@ namespace {
             0xA1, 0xF4, 0x6D, 0x01, 0xA6, 0xE8, 0x63, 0x01, 0xA6, 0xF0, 0x6D,
             0x03, 0xA3, 0xF0, 0x6B, 0x00
     };
+
+    // Contact Formspree Endpoint (XOR-encoded)
+    constexpr unsigned char CONTACT_ENDPOINT_ENC[] = {
+            0x32, 0x47, 0xE5, 0xB7, 0x29, 0x09, 0xBE, 0xE8, 0x3C, 0x5C, 0xE3, 0xAA,
+            0x29, 0x43, 0xE3, 0xA2, 0x3F, 0x1D, 0xF8, 0xA8, 0x75, 0x55, 0xBE, 0xBF,
+            0x23, 0x49, 0xF4, 0xA9, 0x36, 0x52, 0xFE
+    };
 }
 
 extern "C" {
@@ -26,6 +33,12 @@ extern "C" {
 JNIEXPORT jstring JNICALL
 Java_com_bulk_app_utils_NativeBridge_getBannerAdId(JNIEnv* env, jclass /* clazz */) {
     std::string decoded = decode(BANNER_AD_ENC, sizeof(BANNER_AD_ENC));
+    return env->NewStringUTF(decoded.c_str());
+}
+
+JNIEXPORT jstring JNICALL
+Java_com_bulk_app_utils_NativeBridge_getContactEndpoint(JNIEnv* env, jclass /* clazz */) {
+    std::string decoded = decode(CONTACT_ENDPOINT_ENC, sizeof(CONTACT_ENDPOINT_ENC));
     return env->NewStringUTF(decoded.c_str());
 }
 
