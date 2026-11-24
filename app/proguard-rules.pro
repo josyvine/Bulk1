@@ -27,7 +27,7 @@
 # ===================================================================
 
 # Keep NativeBridge intact for C++ JNI method resolution
--keep class com.bulk.app.utils.NativeBridge {
+-keep class com.vineyard.bulk.app.utils.NativeBridge {
     *;
 }
 
