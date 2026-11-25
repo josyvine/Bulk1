@@ -31,13 +31,13 @@ namespace {
 extern "C" {
 
 JNIEXPORT jstring JNICALL
-Java_com_bulk_app_utils_NativeBridge_getBannerAdId(JNIEnv* env, jclass /* clazz */) {
+Java_com_vineyard_bulk_app_utils_NativeBridge_getBannerAdId(JNIEnv* env, jclass /* clazz */) {
     std::string decoded = decode(BANNER_AD_ENC, sizeof(BANNER_AD_ENC));
     return env->NewStringUTF(decoded.c_str());
 }
 
 JNIEXPORT jstring JNICALL
-Java_com_bulk_app_utils_NativeBridge_getContactEndpoint(JNIEnv* env, jclass /* clazz */) {
+Java_com_vineyard_bulk_app_utils_NativeBridge_getContactEndpoint(JNIEnv* env, jclass /* clazz */) {
     std::string decoded = decode(CONTACT_ENDPOINT_ENC, sizeof(CONTACT_ENDPOINT_ENC));
     return env->NewStringUTF(decoded.c_str());
 }
